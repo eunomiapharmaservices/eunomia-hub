@@ -10,19 +10,19 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'DM Sans',sans-serif;background:#F8F9FC;color:#111827;}
+  body{font-family:'DM Sans',sans-serif;background:#F4F7F4;color:#1C2B1D;}
   @keyframes spin{to{transform:rotate(360deg);}}
   @keyframes up{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-  .card{background:#fff;border:1px solid #E5E7EB;border-radius:14px;padding:20px;animation:up 0.2s ease;}
+  .card{background:#fff;border:1px solid #E2E8E2;border-radius:14px;padding:20px;animation:up 0.2s ease;}
   .tab{background:none;border:none;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;color:#6B7280;transition:all .15s;}
-  .tab.on{color:#1E6FE8;border-bottom-color:#1E6FE8;}
+  .tab.on{color:#3d8b40;border-bottom-color:#3d8b40;}
   .tab:hover:not(.on){color:#111827;}
   .tc{border:1.5px solid #E5E7EB;border-radius:10px;padding:14px;cursor:pointer;background:#fff;transition:all .15s;}
-  .tc.sel{border-color:#1E6FE8;background:#EBF2FD;}
-  .tc:hover:not(.sel){border-color:#1E6FE880;}
+  .tc.sel{border-color:#3d8b40;background:#EBF5EC;}
+  .tc:hover:not(.sel){border-color:#3d8b4080;}
   .row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #E5E7EB;font-size:13px;}
   .row:last-child{border-bottom:none;}
-  .cu{background:#1E6FE8;color:#fff;border-radius:12px 12px 2px 12px;padding:10px 14px;font-size:13px;max-width:80%;margin-left:auto;}
+  .cu{background:#3d8b40;color:#fff;border-radius:12px 12px 2px 12px;padding:10px 14px;font-size:13px;max-width:80%;margin-left:auto;}
   .ca{background:#F3F4F6;color:#111827;border-radius:12px 12px 12px 2px;padding:10px 14px;font-size:13px;max-width:85%;white-space:pre-wrap;line-height:1.6;}
   input,button,textarea{font-family:inherit;}
   ::-webkit-scrollbar{width:4px;height:4px;}
@@ -36,16 +36,22 @@ const {useState,useEffect,useRef} = React;
 
 // ── colours ──────────────────────────────────────────────────────────────────
 const C={
-  navy:'#0F1E45',blue:'#1E6FE8',blueL:'#EBF2FD',
-  teal:'#0E9E8E',amber:'#D97706',amberL:'#FEF3C7',
-  red:'#DC2626',redL:'#FEE2E2',green:'#16A34A',greenL:'#DCFCE7',
-  gray:'#6B7280',grayL:'#F3F4F6',border:'#E5E7EB',
-  text:'#111827',muted:'#6B7280',white:'#FFFFFF'
+  navy:'#2C3E2D',       // deep forest green (topbar, headers)
+  blue:'#3d8b40',       // primary green (replaces blue throughout)
+  blueL:'#EBF5EC',      // light green tint
+  teal:'#0E9E8E',       // teal (keep for secondary accents)
+  amber:'#E8651A',      // Eunomia orange (logo accent, warnings)
+  amberL:'#FEF0E8',     // light orange tint
+  red:'#DC2626',redL:'#FEE2E2',
+  green:'#3d8b40',      // success green
+  greenL:'#EBF5EC',
+  gray:'#6B7280',grayL:'#F5F6F5',border:'#E2E8E2',
+  text:'#1C2B1D',muted:'#5C6B5D',white:'#FFFFFF'
 };
 
 // ── tiny components ───────────────────────────────────────────────────────────
 function Spin({s=16}){
-  return <span style={{display:'inline-block',width:s,height:s,border:`2px solid #1E6FE830`,borderTopColor:'#1E6FE8',borderRadius:'50%',animation:'spin .7s linear infinite'}}/>;
+  return <span style={{display:'inline-block',width:s,height:s,border:`2px solid #3d8b4030`,borderTopColor:'#3d8b40',borderRadius:'50%',animation:'spin .7s linear infinite'}}/>;
 }
 function Pill({label,color}){
   return <span style={{fontSize:11,fontWeight:600,background:color+'18',color,borderRadius:20,padding:'2px 9px',whiteSpace:'nowrap'}}>{label}</span>;
@@ -262,9 +268,9 @@ Give specific actionable advice for Eunomia's pharma compliance marketing.`;
   }
 
   const statusDot=(key,name)=>{
-    if(loading[key])return <span style={{fontSize:11,background:C.grayL,color:C.muted,borderRadius:5,padding:'3px 8px',fontWeight:600}}>… {name}</span>;
-    if(usingMock[key])return <span style={{fontSize:11,background:C.amberL,color:C.amber,border:`1px solid ${C.amber}40`,borderRadius:5,padding:'3px 8px',fontWeight:600}}>⚠ {name} (demo)</span>;
-    return <span style={{fontSize:11,background:C.greenL,color:C.green,border:`1px solid ${C.green}40`,borderRadius:5,padding:'3px 8px',fontWeight:600}}>● {name}</span>;
+    if(loading[key])return <span style={{fontSize:11,background:'#ffffff20',color:'#a8c5a9',borderRadius:5,padding:'3px 8px',fontWeight:600}}>… {name}</span>;
+    if(usingMock[key])return <span style={{fontSize:11,background:'#E8651A25',color:'#E8651A',border:'1px solid #E8651A50',borderRadius:5,padding:'3px 8px',fontWeight:600}}>⚠ {name} (demo)</span>;
+    return <span style={{fontSize:11,background:'#3d8b4025',color:'#5db860',border:'1px solid #3d8b4050',borderRadius:5,padding:'3px 8px',fontWeight:600}}>● {name}</span>;
   };
 
   const tabs=[
@@ -279,23 +285,30 @@ Give specific actionable advice for Eunomia's pharma compliance marketing.`;
   return(
     <div style={{minHeight:'100vh'}}>
       {/* topbar */}
-      <div style={{background:C.navy,padding:'0 24px',display:'flex',alignItems:'center',justifyContent:'space-between',height:56,position:'sticky',top:0,zIndex:10}}>
-        <div style={{display:'flex',alignItems:'center',gap:10}}>
-          <div style={{width:30,height:30,borderRadius:8,background:C.blue,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:800,color:'#fff',fontSize:15}}>E</div>
-          <span style={{color:'#fff',fontWeight:700,fontSize:15}}>Eunomia</span>
-          <span style={{color:'#8aaedd',fontSize:12}}>Marketing Hub</span>
+      <div style={{background:'#2C3E2D',padding:'0 24px',display:'flex',alignItems:'center',justifyContent:'space-between',height:60,position:'sticky',top:0,zIndex:10,borderBottom:'2px solid #E8651A'}}>
+        <div style={{display:'flex',alignItems:'center',gap:12}}>
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="19" cy="19" r="18" fill="white" stroke="#E8651A" strokeWidth="2"/>
+            <circle cx="19" cy="19" r="14" fill="none" stroke="#3d8b40" strokeWidth="1.5"/>
+            <path d="M12 19 L17 24 L26 13" stroke="#3d8b40" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M19 4 A15 15 0 0 1 34 19" stroke="#E8651A" strokeWidth="2" strokeLinecap="round" fill="none"/>
+          </svg>
+          <div>
+            <div style={{color:'#fff',fontWeight:700,fontSize:14,letterSpacing:'0.02em',lineHeight:1.1}}>EUNOMIA PHARMA</div>
+            <div style={{color:'#a8c5a9',fontSize:10,letterSpacing:'0.08em',textTransform:'uppercase'}}>Marketing Hub</div>
+          </div>
         </div>
         <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
           {statusDot('li','LinkedIn')}
           {statusDot('sr','Sales Robot')}
           {statusDot('mc','Mailchimp')}
           {statusDot('ht','Hunter.io')}
-          <button onClick={loadAll} style={{background:'none',border:'1px solid #ffffff30',borderRadius:7,color:'#aac4ef',fontSize:12,padding:'4px 12px',cursor:'pointer',marginLeft:4}}>↻ Refresh</button>
+          <button onClick={loadAll} style={{background:'none',border:'1px solid #ffffff40',borderRadius:7,color:'#a8c5a9',fontSize:12,padding:'4px 12px',cursor:'pointer',marginLeft:4}}>↻ Refresh</button>
         </div>
       </div>
 
       {/* tabs */}
-      <div style={{borderBottom:`1px solid ${C.border}`,background:'#fff',padding:'0 24px',display:'flex',gap:4,overflowX:'auto'}}>
+      <div style={{borderBottom:'1px solid #E2E8E2',background:'#fff',padding:'0 24px',display:'flex',gap:4,overflowX:'auto',boxShadow:'0 1px 3px #2C3E2D10'}}>
         {tabs.map(t=><button key={t.id} className={`tab ${tab===t.id?'on':''}`} onClick={()=>setTab(t.id)}>{t.label}</button>)}
       </div>
 
@@ -310,23 +323,23 @@ Give specific actionable advice for Eunomia's pharma compliance marketing.`;
               </Alert>
             )}
             <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12}}>
-              <Stat label="LinkedIn Connections" value={loading.li?'…':li?.connections?.toLocaleString()??'N/A'} sub={li?.name}/>
+              <Stat label="LinkedIn Connections" value={loading.li?'…':li?.connections?.toLocaleString()??'N/A'} sub={li?.name&&li.name!=='undefined undefined'?li.name:'Connected'}/>
               <Stat label="Reply Rate" value={loading.sr?'…':sr?.summary?.replyRate?`${sr.summary.replyRate}%`:'N/A'} sub={sr?`${sr.summary.replies} replies from ${sr.summary.messagesSent} sent`:''} color={C.teal}/>
               <Stat label="Open Rate" value={loading.mc?'…':mc?.openRate?`${mc.openRate}%`:'N/A'} sub={mc?`${mc.subscribers?.toLocaleString()} subscribers`:''} color={C.amber}/>
               <Stat label="Hunter Credits" value={loading.ht?'…':ht?`${ht.creditsUsed}/${ht.creditsTotal}`:'N/A'} sub={ht?.plan} color={C.green}/>
             </div>
 
             {mc?.lastSent&&(
-              <div style={{background:daysUntil(mc.lastSent)<=7?C.amberL:C.blueL,border:`1px solid ${daysUntil(mc.lastSent)<=7?C.amber:C.blue}30`,borderRadius:12,padding:'14px 18px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
+              <div style={{background:daysUntil(mc.lastSent)<=7?'#FEF0E8':'#EBF5EC',border:`1px solid ${daysUntil(mc.lastSent)<=7?'#E8651A':'#3d8b40'}30`,borderRadius:12,padding:'14px 18px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
                 <div>
-                  <div style={{fontSize:12,fontWeight:600,color:daysUntil(mc.lastSent)<=7?C.amber:C.blue,marginBottom:4}}>
+                  <div style={{fontSize:12,fontWeight:600,color:daysUntil(mc.lastSent)<=7?'#E8651A':'#3d8b40',marginBottom:4}}>
                     {daysUntil(mc.lastSent)<=7?'⚠ Newsletter due soon':'📅 Newsletter schedule'}
                   </div>
                   <div style={{fontSize:14,fontWeight:600}}>Next due: {fmt(nextDue(mc.lastSent))} <span style={{fontWeight:400,color:C.muted}}>({daysUntil(mc.lastSent)} days)</span></div>
                   <div style={{fontSize:12,color:C.muted,marginTop:2}}>Last sent {daysSince(mc.lastSent)} days ago — "{mc.lastSubject}"</div>
                 </div>
                 <button onClick={()=>{setTab('newsletter');setComposerOpen(true);setStep('topics');setTopics([]);setSelTopics([]);setDraft('');}}
-                  style={{background:C.blue,color:'#fff',border:'none',borderRadius:8,padding:'10px 18px',fontSize:13,fontWeight:600,cursor:'pointer',whiteSpace:'nowrap'}}>
+                  style={{background:'#3d8b40',color:'#fff',border:'none',borderRadius:8,padding:'10px 18px',fontSize:13,fontWeight:600,cursor:'pointer',whiteSpace:'nowrap',boxShadow:'0 2px 8px #3d8b4040'}}>
                   ✦ Create Newsletter
                 </button>
               </div>
@@ -351,7 +364,7 @@ Give specific actionable advice for Eunomia's pharma compliance marketing.`;
                     placeholder="How is my reply rate? When should I send next?"
                     style={{flex:1,border:`1px solid ${C.border}`,borderRadius:8,padding:'8px 12px',fontSize:13,outline:'none'}}/>
                   <button onClick={sendChat} disabled={chatLoading}
-                    style={{background:C.blue,color:'#fff',border:'none',borderRadius:8,padding:'8px 16px',cursor:'pointer',fontWeight:600,fontSize:13}}>Send</button>
+                    style={{background:'#3d8b40',color:'#fff',border:'none',borderRadius:8,padding:'8px 16px',cursor:'pointer',fontWeight:600,fontSize:13}}>Send</button>
                 </div>
               </div>
 
@@ -379,9 +392,9 @@ Give specific actionable advice for Eunomia's pharma compliance marketing.`;
           <>
             {usingMock.li&&<Alert type="warning">Showing demo data. Add <strong>LINKEDIN_ACCESS_TOKEN</strong> in Vercel env vars for live data.</Alert>}
             <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
-              <Stat label="Account" value={li?.name??'—'} sub="Connected profile"/>
-              <Stat label="Connections" value={li?.connections?.toLocaleString()??'—'} sub="Total network"/>
-              <Stat label="Status" value={usingMock.li?'Demo':'Live'} sub={usingMock.li?'Add token for live data':'Fetching from LinkedIn API'} color={usingMock.li?C.amber:C.green}/>
+              <Stat label="Account" value={li?.name&&li.name!=='undefined undefined'?li.name:li?.email??'Connected'} sub={li?.email&&li.name!=='undefined undefined'?li.email:'LinkedIn profile'}/>
+              <Stat label="Connections" value={li?.connections?.toLocaleString()??'N/A'} sub="Total network — requires r_network scope"/>
+              <Stat label="Status" value={usingMock.li?'Demo':'Live'} sub={usingMock.li?'Add token for live data':'Token connected'} color={usingMock.li?C.amber:C.green}/>
             </div>
             <div className="card">
               <H>How to connect LinkedIn</H>
@@ -464,7 +477,7 @@ Give specific actionable advice for Eunomia's pharma compliance marketing.`;
                 <div style={{fontSize:17,fontWeight:700,marginBottom:8}}>Create your next newsletter</div>
                 <div style={{fontSize:13,color:C.muted,marginBottom:24,maxWidth:360,margin:'0 auto 24px'}}>AI researches current pharma regulatory topics, you choose, then it drafts a full newsletter and sends it to Mailchimp.</div>
                 <button onClick={()=>{setComposerOpen(true);setStep('topics');setTopics([]);setSelTopics([]);setDraft('');setDraftSubj('');setMcResult(null);}}
-                  style={{background:C.blue,color:'#fff',border:'none',borderRadius:10,padding:'13px 30px',fontSize:14,fontWeight:700,cursor:'pointer'}}>
+                  style={{background:'#3d8b40',color:'#fff',border:'none',borderRadius:10,padding:'13px 30px',fontSize:14,fontWeight:700,cursor:'pointer',boxShadow:'0 2px 8px #3d8b4040'}}>
                   ✦ Start Newsletter Creator
                 </button>
               </div>
@@ -759,7 +772,7 @@ function MailchimpTab({mc,usingMock,C,Stat,Alert,H,Pill,Spin,daysSince,daysUntil
       {/* Quick actions */}
       <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
         <button onClick={()=>{setTab('newsletter');setComposerOpen(true);setStep('topics');setTopics([]);setSelTopics([]);setDraft('');setDraftSubj('');setMcResult(null);}}
-          style={{background:C.blue,color:'#fff',border:'none',borderRadius:10,padding:'14px 20px',fontSize:14,fontWeight:700,cursor:'pointer',textAlign:'left',display:'flex',alignItems:'center',gap:12}}>
+          style={{background:'#3d8b40',color:'#fff',border:'none',borderRadius:10,padding:'14px 20px',fontSize:14,fontWeight:700,cursor:'pointer',textAlign:'left',display:'flex',alignItems:'center',gap:12}}>
           <span style={{fontSize:24}}>✦</span>
           <div><div>Create new newsletter</div><div style={{fontSize:12,fontWeight:400,opacity:0.8}}>AI-powered topic research + draft</div></div>
         </button>
@@ -798,7 +811,7 @@ function MailchimpTab({mc,usingMock,C,Stat,Alert,H,Pill,Spin,daysSince,daysUntil
                     </div>
                   ):(
                     <button onClick={()=>setConfirmId(c.id)}
-                      style={{background:C.green,color:'#fff',border:'none',borderRadius:6,padding:'5px 12px',fontSize:12,fontWeight:600,cursor:'pointer'}}>
+                      style={{background:'#3d8b40',color:'#fff',border:'none',borderRadius:6,padding:'5px 12px',fontSize:12,fontWeight:600,cursor:'pointer'}}>
                       ▶ Start Campaign
                     </button>
                   )
